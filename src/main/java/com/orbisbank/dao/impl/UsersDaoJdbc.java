@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UsersDaoJdbc extends JdbcDao implements UsersDao {
 
@@ -43,6 +44,30 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
     }
 
     @Override
+    public ArrayList<Users> getAllUsers() {
+
+        ArrayList<Users> users = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT * FROM public.users";
+
+            PreparedStatement pstmt = getConnection().prepareCall(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                users.add(transformSqlToUsers(rs));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
     public Users getUsersById(int usersId) {
 
         Users user = new Users();
@@ -61,7 +86,7 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
 
                 user = transformSqlToUsers(rs);
 
-            }else {
+            } else {
 
                 System.out.println("user does not exist");
 
@@ -108,7 +133,26 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
         return users;
     }
 
+    @Override
+    public boolean deleteUsersById(int usersId) {
 
+        try {
+
+            String sql = "DELETE FROM public.users WHERE id = ?";
+
+            PreparedStatement pstmt = getConnection().prepareStatement(sql);
+
+            pstmt.setInt(1, usersId);
+
+            pstmt.executeUpdate();
+
+            return false;
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 
 
     private Users transformSqlToUsers(ResultSet rs) throws SQLException {
