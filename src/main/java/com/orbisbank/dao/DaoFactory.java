@@ -12,6 +12,7 @@ public class DaoFactory {
     }
 
     public static UsersDao getUsersDao() throws SQLException{
+
         if(usersDao == null) {
             usersDao = new UsersDaoJdbc();
         }

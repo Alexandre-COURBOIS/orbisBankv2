@@ -15,6 +15,7 @@ public class JdbcDao {
 
     public JdbcDao() throws SQLException{
         this.connection = DriverManager.getConnection(URL, USER, PASS);
+        System.out.println("connected to database");
         //postgre this.connection = DriverManager.getConnection("jdbc:postgresql://hostname:port/dbname", "root", "root");
     }
 

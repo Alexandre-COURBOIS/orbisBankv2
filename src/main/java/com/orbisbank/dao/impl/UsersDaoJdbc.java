@@ -3,9 +3,10 @@ package com.orbisbank.dao.impl;
 import com.orbisbank.dao.UsersDao;
 import com.orbisbank.model.Users;
 
-import java.sql.Connection;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UsersDaoJdbc extends JdbcDao implements UsersDao {
@@ -30,7 +31,7 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
             pstmt.setString(4, users.getPassword());
             pstmt.setDate(5, (Date) users.getCreated_at());
 
-            pstmt.executeUpdate();
+            /*pstmt.executeUpdate();*/
 
             if (pstmt.executeUpdate() == 1) {
                 System.out.println("User has been created");
@@ -39,6 +40,89 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Users getUsersById(int usersId) {
+
+        Users user = new Users();
+
+        try {
+
+            String sql = "SELECT * FROM public.users WHERE id = ?";
+
+            PreparedStatement pstmt = getConnection().prepareCall(sql);
+
+            pstmt.setInt(1, usersId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+
+                user = transformSqlToUsers(rs);
+
+            }else {
+
+                System.out.println("user does not exist");
+
+            }
+        } catch (SQLException throwables) {
+
+            throwables.printStackTrace();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+        return user;
+    }
+
+    @Override
+    public Users getUsersByEmail(String usersEmail) {
+
+        Users users = new Users();
+
+        try {
+
+            String sql = "SELECT * FROM public.users WHERE email = ?";
+            PreparedStatement pstmt = getConnection().prepareCall(sql);
+            pstmt.setString(1, usersEmail);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                users = transformSqlToUsers(rs);
+            } else {
+                System.out.println("user does not exist");
+            }
+        } catch (SQLException throwables) {
+
+            throwables.printStackTrace();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+
+        return users;
+    }
+
+
+
+
+    private Users transformSqlToUsers(ResultSet rs) throws SQLException {
+
+        Users users = new Users();
+
+        users.setUsers_id(rs.getInt("id"));
+        users.setUsers_name(rs.getString("name"));
+        users.setUsers_surname(rs.getString("surname"));
+        users.setUsers_email(rs.getString("email"));
+        users.setPassword(rs.getString("password"));
+        users.setCreated_at(rs.getDate("created_at"));
+
+        return users;
     }
 
 
