@@ -18,7 +18,7 @@ public class Login extends JFrame {
     private JButton loginButton;
     private JLabel emailLabel;
 
-    public Login() {
+    public Login(JFrame frame) {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -34,6 +34,10 @@ public class Login extends JFrame {
                     if (hash.hashPassword(password).equals(user.getPassword())) {
                         System.out.println(" Hello " + user.getUsers_surname() + " " + user.getUsers_name());
                         JOptionPane.showMessageDialog(loginPanel, " Hello " + user.getUsers_surname() + " " + user.getUsers_name());
+                        Register reg = new Register();
+                        frame.setContentPane(reg.getRegister_panel());
+                        frame.pack();
+                        frame.setVisible(true);
                     } else {
                         System.out.println("Wrong email or password");
                         JOptionPane.showMessageDialog(loginPanel, "Wrong email or password");
@@ -43,5 +47,14 @@ public class Login extends JFrame {
                 }
             }
         });
+    }
+    public static void main(String[] args) {
+
+        JFrame frame = new JFrame("Login");
+        frame.setContentPane(new Login(frame).loginPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+
     }
 }
