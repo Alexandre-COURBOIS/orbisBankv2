@@ -12,6 +12,10 @@ public class ClientsController {
 
     private Clients clients;
 
+    public static void main(String[] args) throws SQLException {
+        setClients("Janssen","Pillebout","janssenXxXBG@gmail.com","0666666666", 76000, "23 rue des bg","Rouen" );
+    }
+
     public void newClients() throws SQLException {
         DaoFactory.getClientsDao().createClients(clients);
     }

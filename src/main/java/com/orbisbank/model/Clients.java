@@ -13,7 +13,7 @@ public class Clients {
     private String address;
     private String city;
     private Date created_at;
-    private Date modified_at;
+    private Date updated_at;
 
     public int getClientsId() {
         return clientsId;
@@ -87,12 +87,12 @@ public class Clients {
         this.created_at = created_at;
     }
 
-    public Date getModified_at() {
-        return modified_at;
+    public Date getUpdated_atupdated_at() {
+        return updated_at;
     }
 
-    public void setModified_at(Date modified_at) {
-        this.modified_at = modified_at;
+    public void setUpdated_atupdated_at(Date updated_at) {
+        this.updated_at = updated_at;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class Clients {
                 ", address='" + address + '\'' +
                 ", City='" + city + '\'' +
                 ", created_at=" + created_at +
-                ", modified_at=" + modified_at +
+                ", updated_at=" + updated_at +
                 '}';
     }
 }

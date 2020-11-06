@@ -18,7 +18,7 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
 
     @Override
     public void createClients(Clients clients) {
-        String sql = "INSERT INTO public.clients (surname, name, email, phone, postalcode, address, city, created_at, modified_at )" +
+        String sql = "INSERT INTO public.clients (surname, name, email, phone, postalcode, address, city, created_at)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
