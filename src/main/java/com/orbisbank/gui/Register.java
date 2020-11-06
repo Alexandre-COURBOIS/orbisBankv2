@@ -49,49 +49,41 @@ public class Register {
                 String password = passwordTextField.getText();
                 String password_verify = confirmPasswordTextField.getText();
 
-                String passwordEncoded = hash.hashPassword(password);
-                String passwordVerifyEncoded = hash.hashPassword(password_verify);
-
-                user.setUsers_name(name);
-                user.setUsers_surname(surname);
-                user.setUsers_email(email);
-                user.setPassword(hash.hashPassword(password));
-                user.setCreated_at(date_sql);
-
-                if (passwordEncoded.equals(passwordVerifyEncoded)) {
-                    try {
-
-                        DaoFactory.getUsersDao().createUsers(user);
-
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || password_verify.isEmpty()) {
+                    JOptionPane.showMessageDialog(register_panel, "Complete each text field please");
                 } else {
-                    passwordLabel.setText("Les mots de passe ne correspondent pas.");
+                    String passwordEncoded = hash.hashPassword(password);
+                    String passwordVerifyEncoded = hash.hashPassword(password_verify);
+
+                    user.setUsers_name(name);
+                    user.setUsers_surname(surname);
+                    user.setUsers_email(email);
+                    user.setPassword(hash.hashPassword(password));
+                    user.setCreated_at(date_sql);
+
+                    if (passwordEncoded.equals(passwordVerifyEncoded)) {
+                        try {
+
+                            DaoFactory.getUsersDao().createUsers(user);
+
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else {
+                        passwordLabel.setText("Les mots de passe ne correspondent pas.");
+                    }
                 }
             }
         });
     }
 
-    public static void main(String[] args) {
-
-        JFrame frame = new JFrame("Register");
-        frame.setContentPane(new Register().register_panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-
-    }
 
     public JPanel getRegister_panel() {
         return register_panel;
     }
 
-    public void setRegister_panel(JPanel register_panel) {
-        this.register_panel = register_panel;
-    }
 }
 
 
