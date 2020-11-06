@@ -14,21 +14,15 @@ import java.util.logging.Logger;
 
 public class UsersController {
 
+    private Users users;
 
-    public static void main(String... args){
 
-        try {
-
-            deleteUserById(8);
-
-        }catch (SQLException ex){
-
-            Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+    public void newUsers() throws SQLException {
+        DaoFactory.getUsersDao().createUsers(users);
     }
 
-    public static void newUsers(String name, String surname, String email, String password) throws SQLException {
+
+    public static void setUsers(String name, String surname, String email, String password) throws SQLException {
 
         Users user = new Users();
         SecurityDao security = new SecurityDao();
