@@ -77,13 +77,20 @@ public class Register {
 
     public static void main(String[] args) {
 
-
         JFrame frame = new JFrame("Register");
         frame.setContentPane(new Register().register_panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
 
+    }
+
+    public JPanel getRegister_panel() {
+        return register_panel;
+    }
+
+    public void setRegister_panel(JPanel register_panel) {
+        this.register_panel = register_panel;
     }
 }
 

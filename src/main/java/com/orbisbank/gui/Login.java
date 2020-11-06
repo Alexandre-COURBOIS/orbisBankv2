@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
+
     private JPanel loginPanel;
     private JTextField emailTextField;
     private JTextField passwordTextField;
