@@ -38,6 +38,7 @@ public class Login extends JFrame {
                         frame.setContentPane(reg.getRegister_panel());
                         frame.pack();
                         frame.setVisible(true);
+                        frame.setTitle("Register");
                     } else {
                         System.out.println("Wrong email or password");
                         JOptionPane.showMessageDialog(loginPanel, "Wrong email or password");
@@ -48,13 +49,12 @@ public class Login extends JFrame {
             }
         });
     }
-    public static void main(String[] args) {
 
-        JFrame frame = new JFrame("Login");
-        frame.setContentPane(new Login(frame).loginPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+    public JPanel getLoginPanel() {
+        return loginPanel;
+    }
 
+    public void setLoginPanel(JPanel loginPanel) {
+        this.loginPanel = loginPanel;
     }
 }

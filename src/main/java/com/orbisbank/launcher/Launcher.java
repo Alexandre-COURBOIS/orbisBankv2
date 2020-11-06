@@ -15,8 +15,8 @@ public class Launcher extends JFrame {
 
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame("Register");
-        frame.setContentPane(new Register().getRegister_panel());
+        JFrame frame = new JFrame("Login");
+        frame.setContentPane(new Login(frame).getLoginPanel());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
