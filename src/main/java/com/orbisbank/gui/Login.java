@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login {
+public class Login extends JFrame {
 
     private JPanel loginPanel;
     private JTextField emailTextField;
@@ -33,23 +33,15 @@ public class Login {
                     user = DaoFactory.getUsersDao().getUsersByEmail(email);
                     if (hash.hashPassword(password).equals(user.getPassword())) {
                         System.out.println(" Hello " + user.getUsers_surname() + " " + user.getUsers_name());
+                        JOptionPane.showMessageDialog(loginPanel, " Hello " + user.getUsers_surname() + " " + user.getUsers_name());
                     } else {
                         System.out.println("Wrong email or password");
+                        JOptionPane.showMessageDialog(loginPanel, "Wrong email or password");
                     }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
         });
-    }
-
-    public static void main(String[] args) {
-
-        JFrame frame = new JFrame("Login");
-        frame.setContentPane(new Login().loginPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-
     }
 }
