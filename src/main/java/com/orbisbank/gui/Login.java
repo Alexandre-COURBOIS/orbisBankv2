@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Login {
+public class Login extends JFrame {
     private JPanel loginPanel;
     private JTextField emailTextField;
     private JTextField passwordTextField;
@@ -43,11 +43,11 @@ public class Login {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
-
-        frame.setContentPane(new Login().loginPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                Login loginForm = new Login();
+                loginForm.setVisible(true);
+            }
+        });
     }
 }
