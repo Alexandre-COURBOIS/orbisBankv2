@@ -36,7 +36,6 @@ public class Admin extends JFrame {
     private JButton button2;
     private JButton button3;
     private JTextField textField1;
-    private JTextField textField2;
     private JTextField textField3;
 
     public Admin() {
