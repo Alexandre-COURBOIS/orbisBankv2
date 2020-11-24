@@ -32,12 +32,16 @@ public class Admin extends JFrame {
     private JLabel log;
     private JPanel ButtonLogout;
     private JPanel TitleAdmin;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JButton buttonEdit;
+    private JButton buttonDelete;
+    private JButton buttonEmail;
+    private JTextField searchCommerciaux;
+    private JScrollPane scrollCommerciaux;
+    private JScrollPane scrollContrats;
+    private JLabel IDClient;
+    private JLabel nomClient;
+    private JLabel prenomClient;
+    private JScrollPane scrollClients;
 
     public Admin() {
         utilisateursButton.setBackground(white);
@@ -54,12 +58,12 @@ public class Admin extends JFrame {
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
-        button1.setFocusPainted(false);
-        button1.setBorder(null);
-        button2.setFocusPainted(false);
-        button2.setBorder(null);
-        button3.setFocusPainted(false);
-        button3.setBorder(null);
+        buttonEdit.setFocusPainted(false);
+        buttonEdit.setBorder(null);
+        buttonDelete.setFocusPainted(false);
+        buttonDelete.setBorder(null);
+        buttonEmail.setFocusPainted(false);
+        buttonEmail.setBorder(null);
     }
 
     public static void main(String[] args) {
