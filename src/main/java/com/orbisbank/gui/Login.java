@@ -34,11 +34,11 @@ public class Login extends JFrame {
                     if (hash.hashPassword(password).equals(user.getPassword())) {
                         System.out.println(" Hello " + user.getUsers_surname() + " " + user.getUsers_name());
                         JOptionPane.showMessageDialog(loginPanel, " Hello " + user.getUsers_surname() + " " + user.getUsers_name());
-                        Register reg = new Register();
-                        frame.setContentPane(reg.getRegister_panel());
-                        frame.pack();
+                        Admin admin = new Admin();
+                        frame.setContentPane(admin.getAdminPanel());
+                        frame.pack();;
                         frame.setVisible(true);
-                        frame.setTitle("Register");
+                        frame.setTitle("Users Administration");
                     } else {
                         System.out.println("Wrong email or password");
                         JOptionPane.showMessageDialog(loginPanel, "Wrong email or password");

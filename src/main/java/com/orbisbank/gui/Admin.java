@@ -111,4 +111,9 @@ public class Admin extends JFrame {
         admin.pack();
         admin.setVisible(true);
     }
+
+    public JPanel getAdminPanel() {
+        return adminPanel;
+    }
+
 }
