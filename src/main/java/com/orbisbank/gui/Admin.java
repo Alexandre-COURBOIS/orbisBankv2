@@ -115,5 +115,4 @@ public class Admin extends JFrame {
     public JPanel getAdminPanel() {
         return adminPanel;
     }
-
 }
