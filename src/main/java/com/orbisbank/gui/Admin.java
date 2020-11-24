@@ -36,8 +36,8 @@ public class Admin extends JFrame {
     private JButton button2;
     private JButton button3;
     private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
+    private JList list1;
+    private JTable tableCommerciaux;
 
     public Admin() {
         utilisateursButton.setBackground(white);
@@ -68,5 +68,9 @@ public class Admin extends JFrame {
         admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         admin.pack();
         admin.setVisible(true);
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
