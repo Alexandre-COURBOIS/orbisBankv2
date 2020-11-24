@@ -1,6 +1,19 @@
 package com.orbisbank.gui;
 
+import com.orbisbank.dao.DaoFactory;
+import com.orbisbank.dao.UsersDao;
+import com.orbisbank.dao.impl.ClientsDaoJdbc;
+import com.orbisbank.model.Users;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import static java.awt.Color.*;
 
 
@@ -32,14 +45,20 @@ public class Admin extends JFrame {
     private JLabel log;
     private JPanel ButtonLogout;
     private JPanel TitleAdmin;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JButton buttonEdit;
+    private JButton buttonDelete;
+    private JButton buttonMail;
     private JTextField textField1;
-    private JList list1;
-    private JTable tableCommerciaux;
+    private JTextField textField2;
+    private JScrollPane scrollPane;
+    private JScrollPane scrollClients;
+    private JTextField searchCommerciaux;
+    private JScrollPane scrollContrats;
+    private JLabel IDClient;
+    private JLabel nomClient;
+    private JLabel prenomClient;
 
-    public Admin() {
+    public Admin() throws SQLException {
         utilisateursButton.setBackground(white);
         utilisateursButton.setForeground(black);
         utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
@@ -54,15 +73,38 @@ public class Admin extends JFrame {
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
-        button1.setFocusPainted(false);
-        button1.setBorder(null);
-        button2.setFocusPainted(false);
-        button2.setBorder(null);
-        button3.setFocusPainted(false);
-        button3.setBorder(null);
+        buttonEdit.setFocusPainted(false);
+        buttonEdit.setBorder(null);
+        buttonDelete.setFocusPainted(false);
+        buttonDelete.setBorder(null);
+        buttonMail.setFocusPainted(false);
+        buttonMail.setBorder(null);
+
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsers();
+
+        String[] columns = new String[] {
+                "Id", "Name", "Surname", "Email",
+        };
+
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+
+        for (Users user : users) {
+            Object[] data = {user.getUsers_id(), user.getUsers_name(), user.getUsers_surname(), user.getUsers_email()};
+            tableModel.addRow(data);
+        }
+
+
+        JTable myTable = new JTable(tableModel);
+
+        myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
+        scrollPane.setViewportView(myTable);
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws SQLException {
         JFrame admin = new JFrame("Admin");
         admin.setContentPane(new Admin().adminPanel);
         admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,7 +112,7 @@ public class Admin extends JFrame {
         admin.setVisible(true);
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    public JPanel getAdminPanel() {
+        return adminPanel;
     }
 }

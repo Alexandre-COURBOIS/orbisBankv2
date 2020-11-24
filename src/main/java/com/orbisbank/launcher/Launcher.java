@@ -22,4 +22,5 @@ public class Launcher extends JFrame {
         frame.setVisible(true);
 
     }
+
 }
