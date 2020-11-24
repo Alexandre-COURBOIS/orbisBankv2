@@ -51,6 +51,12 @@ public class Admin extends JFrame {
     private JTextField textField1;
     private JTextField textField2;
     private JScrollPane scrollPane;
+    private JScrollPane scrollClients;
+    private JTextField searchCommerciaux;
+    private JScrollPane scrollContrats;
+    private JLabel IDClient;
+    private JLabel nomClient;
+    private JLabel prenomClient;
 
     public Admin() throws SQLException {
         utilisateursButton.setBackground(white);
