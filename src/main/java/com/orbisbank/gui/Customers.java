@@ -1,6 +1,10 @@
 package com.orbisbank.gui;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.*;
 
 public class Customers extends JFrame {
     private JPanel clientsPanel;
@@ -17,22 +21,23 @@ public class Customers extends JFrame {
     private JTextField searchTextField;
     private JButton searchButton;
     private JLabel titlePanel;
+    private JTable table1;
+    private JScrollPane scrollPane;
 
     public Customers() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        String[] columns = new String[]{
+                "Id", "Nom", "Prénom", "Email", "Téléphone", "Adresse"
+        };
 
-        this.screenRightBottom = new JPanel();
+        Object[][] data = new Object[][]{
 
-        String data[][]={ {"101","Amit","670000"},
-                {"102","Jai","780000"},
-                {"101","Sachin","700000"}};
-        String column[]={"ID","NAME","SALARY"};
+        };
 
-        JTable tableClients = new JTable(data, column);
-
-
-
+        JTable myTable = new JTable(data, columns);
+        myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
+        scrollPane.setViewportView(myTable);
     }
 
 
@@ -41,5 +46,9 @@ public class Customers extends JFrame {
         clients.setContentPane(new Customers().clientsPanel);
         clients.pack();
         clients.setVisible(true);
+
+
     }
+
+
 }
