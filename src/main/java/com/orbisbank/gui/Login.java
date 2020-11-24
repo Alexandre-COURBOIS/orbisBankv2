@@ -17,6 +17,7 @@ public class Login extends JFrame {
     private JLabel passwordLabel;
     private JButton loginButton;
     private JLabel emailLabel;
+    private JPasswordField loginPassword;
 
     public Login(JFrame frame) {
         loginButton.addActionListener(new ActionListener() {
