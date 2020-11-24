@@ -1,6 +1,19 @@
 package com.orbisbank.gui;
 
+import com.orbisbank.dao.DaoFactory;
+import com.orbisbank.dao.UsersDao;
+import com.orbisbank.dao.impl.ClientsDaoJdbc;
+import com.orbisbank.model.Users;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import static java.awt.Color.*;
 
 
@@ -34,16 +47,12 @@ public class Admin extends JFrame {
     private JPanel TitleAdmin;
     private JButton buttonEdit;
     private JButton buttonDelete;
-    private JButton buttonEmail;
-    private JTextField searchCommerciaux;
-    private JScrollPane scrollCommerciaux;
-    private JScrollPane scrollContrats;
-    private JLabel IDClient;
-    private JLabel nomClient;
-    private JLabel prenomClient;
-    private JScrollPane scrollClients;
+    private JButton buttonMail;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JScrollPane scrollPane;
 
-    public Admin() {
+    public Admin() throws SQLException {
         utilisateursButton.setBackground(white);
         utilisateursButton.setForeground(black);
         utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
@@ -62,11 +71,34 @@ public class Admin extends JFrame {
         buttonEdit.setBorder(null);
         buttonDelete.setFocusPainted(false);
         buttonDelete.setBorder(null);
-        buttonEmail.setFocusPainted(false);
-        buttonEmail.setBorder(null);
+        buttonMail.setFocusPainted(false);
+        buttonMail.setBorder(null);
+
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsers();
+
+        String[] columns = new String[] {
+                "Id", "Name", "Surname", "Email",
+        };
+
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+
+        for (Users user : users) {
+            Object[] data = {user.getUsers_id(), user.getUsers_name(), user.getUsers_surname(), user.getUsers_email()};
+            tableModel.addRow(data);
+        }
+
+
+        JTable myTable = new JTable(tableModel);
+
+        myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
+        scrollPane.setViewportView(myTable);
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws SQLException {
         JFrame admin = new JFrame("Admin");
         admin.setContentPane(new Admin().adminPanel);
         admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
