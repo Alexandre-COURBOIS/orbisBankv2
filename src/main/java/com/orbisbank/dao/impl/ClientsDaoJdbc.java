@@ -169,12 +169,12 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
 
         clients.setClientsId(rs.getInt("id"));
         clients.setSurname(rs.getString("surname"));
-        clients.setSurname(rs.getString("name"));
-        clients.setSurname(rs.getString("email"));
-        clients.setSurname(rs.getString("phone"));
+        clients.setName(rs.getString("name"));
+        clients.setEmail(rs.getString("email"));
+        clients.setPhone(rs.getString("phone"));
         clients.setPostalCode(rs.getInt("postalcode"));
-        clients.setSurname(rs.getString("address"));
-        clients.setSurname(rs.getString("city"));
+        clients.setAddress(rs.getString("address"));
+        clients.setCity(rs.getString("city"));
         clients.setCreated_at(rs.getDate("created_at"));
 
         return clients;
