@@ -1,11 +1,14 @@
 package com.orbisbank.gui;
 
 import com.orbisbank.dao.DaoFactory;
+import com.orbisbank.dao.impl.UsersDaoJdbc;
 import com.orbisbank.model.Users;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Array;
@@ -97,34 +100,37 @@ public class Admin extends JFrame {
         }
 
 
-        JTable myTable = new JTable(tableModel);
+        JTable usersTable = new JTable(tableModel);
 
-        myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
-        scrollPane.setViewportView(myTable);
+        usersTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
+        scrollPane.setViewportView(usersTable);
 
 
-        myTable.addMouseListener(new MouseAdapter() {
+        usersTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                int row = myTable.getSelectedRow();
-                int column = myTable.getColumnCount();
+                int row = usersTable.getSelectedRow();
+                int column = usersTable.getColumnCount();
 
-                Object objSurname = GetData(myTable, row, 1);
-                Object objName = GetData(myTable, row, 2);
-                Object objEmail = GetData(myTable, row, 3);
+                Object objId =  GetData(usersTable, row, 0);
+                Object objSurname = GetData(usersTable, row, 1);
+                Object objName = GetData(usersTable, row, 2);
+                Object objEmail = GetData(usersTable, row, 3);
                 String userSurname = objSurname.toString();
                 String userName = objName.toString();
                 String userEmail = objEmail.toString();
+                String userId = objId.toString();
 
                 name.setText(userSurname + " " + userName);
                 email.setText(userEmail);
+                id.setText(userId);
 
 /*
                 for (int i = 0; i < column; i++) {
 
-                    String value = " " + myTable.getValueAt(row, i).toString();
+                    String value = " " + usersTable.getValueAt(row, i).toString();
 
                     System.out.println(value);
 
@@ -132,6 +138,29 @@ public class Admin extends JFrame {
 */
 
 
+            }
+        });
+
+        buttonDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Object objId =  GetData(usersTable, usersTable.getSelectedRow(), 0);
+                int id = (Integer) objId;
+
+                int result = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer cet utilisateur ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                if(usersTable.getSelectedRow() != -1 && result == JOptionPane.YES_OPTION) {
+                    tableModel.removeRow(usersTable.getSelectedRow());
+                    try {
+                        UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc();
+                        usersDaoJdbc.deleteUsersById(id);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
+                    JOptionPane.showMessageDialog(null, "L'utilisateur a bien été supprimé");
+                }
             }
         });
 
