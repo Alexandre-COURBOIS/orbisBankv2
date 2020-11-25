@@ -21,18 +21,37 @@ public class AdminClients {
     private JPanel TitleAdmin;
     private JLabel titleAdmin;
     private JPanel divUser;
-    private JPanel divPhoto;
-    private JPanel divName;
-    private JLabel name;
-    private JLabel stats;
-    private JPanel divEdit;
-    private JLabel edit;
-    private JLabel delete;
-    private JLabel contact;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
+    private JPanel divH2;
+    private JPanel divLabels;
+    private JLabel surname;
+    private JPanel divButtons;
+    private JLabel editLabel;
+    private JLabel deleteLabel;
+    private JLabel emailLabel;
+    private JButton editButton;
+    private JButton deleteButton;
+    private JButton emailButton;
     private JPanel divContent;
+    private JLabel name;
+    private JLabel id;
+    private JLabel phone;
+    private JLabel postalcode;
+    private JLabel adress;
+    private JLabel city;
+    private JLabel created_at;
+    private JLabel updated_at;
+    private JPanel divEdit;
+    private JTextField surnameField;
+    private JTextField nameField;
+    private JTextField emailField;
+    private JTextField phoneField;
+    private JTextField postalcodeField;
+    private JTextField addressField;
+    private JTextField cityField;
+    private JTextField created_atField;
+    private JLabel idLabel;
+    private JLabel email;
+    private JTextField updated_atField;
 
     public AdminClients() {
         utilisateursButton.setBackground(white);
@@ -49,12 +68,12 @@ public class AdminClients {
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
-        button1.setFocusPainted(false);
-        button1.setBorder(null);
-        button2.setFocusPainted(false);
-        button2.setBorder(null);
-        button3.setFocusPainted(false);
-        button3.setBorder(null);
+        editButton.setFocusPainted(false);
+        editButton.setBorder(null);
+        deleteButton.setFocusPainted(false);
+        deleteButton.setBorder(null);
+        emailButton.setFocusPainted(false);
+        emailButton.setBorder(null);
     }
 
     String[] columns = new String[] {
