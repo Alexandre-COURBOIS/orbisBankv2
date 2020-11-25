@@ -9,7 +9,6 @@ public class AdminClients {
     private JPanel adminClients;
     private JPanel divLeft;
     private JButton utilisateursButton;
-    private JButton commerciauxButton;
     private JButton clientsButton;
     private JPanel divLogoTop;
     private JPanel divRight;
@@ -57,10 +56,6 @@ public class AdminClients {
         utilisateursButton.setBackground(white);
         utilisateursButton.setForeground(black);
         utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
-
-        commerciauxButton.setBackground(white);
-        commerciauxButton.setForeground(black);
-        commerciauxButton.setBorder(BorderFactory.createLineBorder(black));
 
         clientsButton.setBackground(white);
         clientsButton.setForeground(black);
