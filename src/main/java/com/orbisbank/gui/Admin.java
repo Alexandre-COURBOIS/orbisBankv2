@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -82,7 +83,7 @@ public class Admin extends JFrame {
 
         ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsers();
 
-        String[] columns = new String[] {
+        String[] columns = new String[]{
                 "Id", "Name", "Surname", "Email",
         };
 
@@ -99,11 +100,35 @@ public class Admin extends JFrame {
         myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
         scrollPane.setViewportView(myTable);
 
+
+        ArrayList objs = new ArrayList();
+
         myTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                System.out.println("totov2");
+
+                int row = myTable.getSelectedRow();
+                int column = myTable.getColumnCount();
+
+                for (int i = 0; i < column; i++ ) {
+
+                    String value = "" + myTable.getValueAt(row, i).toString();
+
+                    System.out.println(value);
+                }
+
+
+/*                Object[] val = new Object[column];
+                for (int k = 0; k < val.length - 1; k++) {
+                    for (int j = 0; j < row; j++) {
+                        for (int i = 0; i < column; i++) {
+                        val[k] = myTable.getValueAt(j,i);
+                            System.out.println(val[k]);
+                        }
+                    }
+                }*/
+
             }
         });
 
