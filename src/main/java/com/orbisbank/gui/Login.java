@@ -28,7 +28,7 @@ public class Login extends JFrame {
                 SecurityDao hash = new SecurityDao();
 
                 String email = emailTextField.getText();
-                String password = passwordTextField.getText();
+                String password = loginPassword.getText();
 
                 try {
                     user = DaoFactory.getUsersDao().getUsersByEmail(email);
