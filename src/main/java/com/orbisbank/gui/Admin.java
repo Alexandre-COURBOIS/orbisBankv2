@@ -1,16 +1,13 @@
 package com.orbisbank.gui;
 
 import com.orbisbank.dao.DaoFactory;
-import com.orbisbank.dao.UsersDao;
-import com.orbisbank.dao.impl.ClientsDaoJdbc;
 import com.orbisbank.model.Users;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -101,6 +98,15 @@ public class Admin extends JFrame {
 
         myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
         scrollPane.setViewportView(myTable);
+
+        myTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                System.out.println("totov2");
+            }
+        });
+
     }
 
 
