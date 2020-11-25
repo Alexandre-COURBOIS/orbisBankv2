@@ -52,7 +52,7 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
 
         try {
 
-            String sql = "SELECT * FROM public.users";
+            String sql = "SELECT * FROM public.clients";
 
             PreparedStatement pstmt = getConnection().prepareCall(sql);
 
@@ -147,7 +147,7 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
 
         try {
 
-            String sql = "DELETE FROM public.users WHERE id = ?";
+            String sql = "DELETE FROM public.clients WHERE id = ?";
 
             PreparedStatement pstmt = getConnection().prepareStatement(sql);
 
