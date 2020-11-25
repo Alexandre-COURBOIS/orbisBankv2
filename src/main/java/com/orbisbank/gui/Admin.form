@@ -327,10 +327,10 @@
                       <background color="-16771273"/>
                       <font size="36" style="1"/>
                       <foreground color="-2368548"/>
-                      <text value="Nom Prénom"/>
+                      <text value=""/>
                     </properties>
                   </component>
-                  <component id="f0d89" class="javax.swing.JLabel" binding="stats">
+                  <component id="f0d89" class="javax.swing.JLabel" binding="email">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false">
                         <minimum-size width="-1" height="75"/>
@@ -340,7 +340,7 @@
                       <background color="-16771273"/>
                       <font size="20" style="0"/>
                       <foreground color="-2368548"/>
-                      <text value="Statistiques : "/>
+                      <text value=""/>
                     </properties>
                   </component>
                 </children>
@@ -522,13 +522,10 @@
                               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                             </constraints>
                             <properties>
-                              <autoResizeMode value="2"/>
                               <autoscrolls value="true"/>
                               <enabled value="true"/>
-                              <fillsViewportHeight value="false"/>
                               <name value=""/>
                               <toolTipText value=""/>
-                              <updateSelectionOnSort value="true"/>
                             </properties>
                           </component>
                         </children>

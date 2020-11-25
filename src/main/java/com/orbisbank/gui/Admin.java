@@ -1,18 +1,18 @@
 package com.orbisbank.gui;
 
 import com.orbisbank.dao.DaoFactory;
-import com.orbisbank.dao.UsersDao;
-import com.orbisbank.dao.impl.ClientsDaoJdbc;
 import com.orbisbank.model.Users;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.awt.Color.*;
 
@@ -36,7 +36,7 @@ public class Admin extends JFrame {
     private JPanel divId;
     private JLabel photo;
     private JLabel name;
-    private JLabel stats;
+    private JLabel email;
     private JLabel edit;
     private JLabel delete;
     private JLabel contact;
@@ -85,7 +85,7 @@ public class Admin extends JFrame {
 
         ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsers();
 
-        String[] columns = new String[] {
+        String[] columns = new String[]{
                 "Id", "Name", "Surname", "Email",
         };
 
@@ -101,8 +101,45 @@ public class Admin extends JFrame {
 
         myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
         scrollPane.setViewportView(myTable);
+
+
+        myTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                int row = myTable.getSelectedRow();
+                int column = myTable.getColumnCount();
+
+                Object objSurname = GetData(myTable, row, 1);
+                Object objName = GetData(myTable, row, 2);
+                Object objEmail = GetData(myTable, row, 3);
+                String userSurname = objSurname.toString();
+                String userName = objName.toString();
+                String userEmail = objEmail.toString();
+
+                name.setText(userSurname + " " + userName);
+                email.setText(userEmail);
+
+/*
+                for (int i = 0; i < column; i++) {
+
+                    String value = " " + myTable.getValueAt(row, i).toString();
+
+                    System.out.println(value);
+
+                }
+*/
+
+
+            }
+        });
+
     }
 
+    public Object GetData(JTable table, int row_index, int col_index) {
+        return table.getModel().getValueAt(row_index, col_index);
+    }
 
     public static void main(String[] args) throws SQLException {
         JFrame admin = new JFrame("Admin");
