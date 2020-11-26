@@ -33,13 +33,24 @@ public class Login extends JFrame {
                 try {
                     user = DaoFactory.getUsersDao().getUsersByEmail(email);
                     if (hash.hashPassword(password).equals(user.getPassword())) {
+
                         System.out.println(" Hello " + user.getUsers_surname() + " " + user.getUsers_name());
+
                         JOptionPane.showMessageDialog(loginPanel, " Hello " + user.getUsers_surname() + " " + user.getUsers_name());
-                        Admin admin = new Admin(frame);
-                        frame.setContentPane(admin.getAdminPanel());
-                        frame.pack();
-                        frame.setVisible(true);
-                        frame.setTitle("Users Administration");
+
+                        if (user.getRole().equals("admin")) {
+                            Admin admin = new Admin(frame);
+                            frame.setContentPane(admin.getAdminPanel());
+                            frame.pack();
+                            frame.setVisible(true);
+                            frame.setTitle("Administration utilisateurs banque");
+                        } else if (user.getRole().equals("banque")) {
+                            Customers customers = new Customers(frame);
+                            frame.setContentPane(customers.getClientsPanel());
+                            frame.pack();
+                            frame.setVisible(true);
+                            frame.setTitle("Gestion des clients");
+                        }
                     } else {
                         System.out.println("Wrong email or password");
                         JOptionPane.showMessageDialog(loginPanel, "Wrong email or password");

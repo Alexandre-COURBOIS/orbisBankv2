@@ -9,6 +9,9 @@ public class Clients {
     private String name;
     private String email;
     private String phone;
+    private int age;
+    private int income;
+    private boolean owner;
     private int postalCode;
     private String address;
     private String city;
@@ -55,6 +58,30 @@ public class Clients {
         this.phone = phone;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getIncome() {
+        return income;
+    }
+
+    public void setIncome(int income) {
+        this.income = income;
+    }
+
+    public boolean isOwner() {
+        return owner;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
+    }
+
     public int getPostalCode() {
         return postalCode;
     }
@@ -87,11 +114,11 @@ public class Clients {
         this.created_at = created_at;
     }
 
-    public Date getUpdated_atupdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_atupdated_at(Date updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -102,13 +129,16 @@ public class Clients {
                 ", surname='" + surname + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", phone=" + phone +
+                ", phone='" + phone + '\'' +
+                ", age=" + age +
+                ", income=" + income +
+                ", owner=" + owner +
                 ", postalCode=" + postalCode +
                 ", address='" + address + '\'' +
-                ", City='" + city + '\'' +
+                ", city='" + city + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
                 '}';
     }
-}
 
+}

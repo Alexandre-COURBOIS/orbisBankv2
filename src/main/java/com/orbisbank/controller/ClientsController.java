@@ -13,7 +13,7 @@ public class ClientsController {
     private Clients clients;
 
     public static void main(String[] args) throws SQLException {
-        setClients("Pierre","Alex","pierroalex@gmail.com","0666666666", 76000, "23 rue des bg","Rouen" );
+        getAllClients();
     }
 
     public void newClients() throws SQLException {
@@ -38,7 +38,6 @@ public class ClientsController {
         client.setCreated_at(date_sql);
 
         DaoFactory.getClientsDao().createClients(client);
-
     }
 
     public static void getAllClients() throws SQLException {

@@ -63,6 +63,7 @@ public class Register {
                     user.setUsers_email(email);
                     user.setPassword(hash.hashPassword(StrPassword));
                     user.setCreated_at(date_sql);
+                    user.setRole("banque");
 
                     if (passwordEncoded.equals(passwordVerifyEncoded)) {
                         try {
@@ -81,7 +82,6 @@ public class Register {
             }
         });
     }
-
 
     public JPanel getRegister_panel() {
         return register_panel;

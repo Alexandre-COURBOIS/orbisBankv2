@@ -10,21 +10,8 @@ public class Users {
     private String users_email;
     private String password;
     private Date created_at;
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "users_id=" + users_id +
-                ", users_name='" + users_name + '\'' +
-                ", users_surname='" + users_surname + '\'' +
-                ", users_email='" + users_email + '\'' +
-                ", password='" + password + '\'' +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
-                '}';
-    }
-
     private Date updated_at;
+    private String role;
 
     public int getUsers_id() {
         return users_id;
@@ -82,4 +69,24 @@ public class Users {
         this.updated_at = updated_at;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "users_id=" + users_id +
+                ", users_name='" + users_name + '\'' +
+                ", users_surname='" + users_surname + '\'' +
+                ", users_email='" + users_email + '\'' +
+                ", password='" + password + '\'' +
+                ", created_at=" + created_at +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
