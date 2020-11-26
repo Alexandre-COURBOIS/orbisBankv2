@@ -110,14 +110,17 @@ public class AdminClients {
                     user.setUpdated_at(date_sql);
                     user.setUsers_id(userId);
 
-                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer l'utilisateur " + newName, JOptionPane.YES_NO_CANCEL_OPTION);
+                    if (!newSurname.isEmpty() || !newName.isEmpty() || !newEmail.isEmpty()) {
+                        int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer l'utilisateur " + newName, JOptionPane.YES_NO_CANCEL_OPTION);
 
-                    if (result == JOptionPane.YES_OPTION) {
-                        DaoFactory.getUsersDao().update(user);
-                        JOptionPane.showMessageDialog(null, "L'utilisateur a bien été modifié !");
-                        frame.dispose();
+                        if (result == JOptionPane.YES_OPTION) {
+                            DaoFactory.getUsersDao().update(user);
+                            JOptionPane.showMessageDialog(null, "L'utilisateur a bien été modifié !");
+                            frame.dispose();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Merci de renseigner les champs correctement");
                     }
-
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -133,8 +136,8 @@ public class AdminClients {
                 Date date_util = new Date();
                 java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
 
-                char[] newPasswordUser = newPassword.getPassword(); //Deprecated, think to find an other issue
-                char[] newPassword_verify = validateNewPassword.getPassword(); //Deprecated, think to find an other issue
+                char[] newPasswordUser = newPassword.getPassword();
+                char[] newPassword_verify = validateNewPassword.getPassword();
 
                 String strNewPwd = String.valueOf(newPasswordUser);
                 String strNewPwdVerify = String.valueOf(newPassword_verify);
