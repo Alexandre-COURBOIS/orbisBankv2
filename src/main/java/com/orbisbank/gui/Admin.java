@@ -61,7 +61,7 @@ public class Admin extends JFrame {
     private JLabel nomClient;
     private JLabel prenomClient;
 
-    public Admin() throws SQLException {
+    public Admin(JFrame frame) throws SQLException {
         utilisateursButton.setBackground(white);
         utilisateursButton.setForeground(black);
         utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
@@ -164,19 +164,40 @@ public class Admin extends JFrame {
             }
         });
 
+        utilisateursButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // BOUTON UTILISATEURS
+            }
+        });
+        commerciauxButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //BOUTON COMMERCIAUX
+            }
+        });
+        clientsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //BOUTON CLIENTS
+            }
+        });
+        buttonLogout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login login = new Login(frame);
+                frame.setContentPane(login.getLoginPanel());
+                frame.pack();;
+                frame.setVisible(true);
+                frame.setTitle("Login");
+            }
+        });
     }
 
     public Object GetData(JTable table, int row_index, int col_index) {
         return table.getModel().getValueAt(row_index, col_index);
     }
 
-    public static void main(String[] args) throws SQLException {
-        JFrame admin = new JFrame("Admin");
-        admin.setContentPane(new Admin().adminPanel);
-        admin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        admin.pack();
-        admin.setVisible(true);
-    }
 
     public JPanel getAdminPanel() {
         return adminPanel;
