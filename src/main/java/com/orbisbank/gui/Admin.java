@@ -92,7 +92,14 @@ public class Admin extends JFrame {
                 "Id", "Name", "Surname", "Email",
         };
 
-        DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0){
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return false;
+            }
+        };
+
+
 
         for (Users user : users) {
             Object[] data = {user.getUsers_id(), user.getUsers_name(), user.getUsers_surname(), user.getUsers_email()};
@@ -181,6 +188,13 @@ public class Admin extends JFrame {
                     frame.pack();
                     frame.setVisible(true);
                     frame.setLocationRelativeTo(null);
+
+                    System.out.println("active" + frame.isActive());
+
+
+                    if (frame.isActive()) {
+
+                    }
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

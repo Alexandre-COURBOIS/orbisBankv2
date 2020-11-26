@@ -109,8 +109,14 @@ public class AdminClients {
                     user.setUpdated_at(date_sql);
                     user.setUsers_id(userId);
 
-                    DaoFactory.getUsersDao().update(user);
-                    System.out.println("user updated :D");
+                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                    if (result == JOptionPane.YES_OPTION) {
+                        DaoFactory.getUsersDao().update(user);
+                        JOptionPane.showMessageDialog(null, "L'utilisateur a bien été modifié !");
+                        frame.dispose();
+                    }
+
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
