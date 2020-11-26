@@ -110,7 +110,7 @@ public class AdminClients {
                     user.setUpdated_at(date_sql);
                     user.setUsers_id(userId);
 
-                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer l'utilisateur " + newName , JOptionPane.YES_NO_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer l'utilisateur " + newName, JOptionPane.YES_NO_CANCEL_OPTION);
 
                     if (result == JOptionPane.YES_OPTION) {
                         DaoFactory.getUsersDao().update(user);
@@ -147,7 +147,6 @@ public class AdminClients {
                     if (passwordEncoded.equals(passwordVerifyEncoded)) {
                         try {
 
-                            System.out.println("toto");
                             Users user = new Users();
 
                             user.setPassword(passwordEncoded);
