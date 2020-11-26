@@ -13,4 +13,5 @@ public interface UsersDao {
     public boolean deleteUsersById(int id);
     public void update(Users users);
     public void updatePassword(Users users);
+    public ArrayList<Users> getAllUsersByRole(String role);
 }

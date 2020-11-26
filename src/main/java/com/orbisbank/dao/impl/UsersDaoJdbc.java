@@ -19,8 +19,8 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
     @Override
     public void createUsers(Users users) {
 
-        String sql = "INSERT INTO public.users (name, surname, email, password, created_at)" +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO public.users (name, surname, email, password, created_at, role)" +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -31,6 +31,7 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
             pstmt.setString(3, users.getUsers_email());
             pstmt.setString(4, users.getPassword());
             pstmt.setDate(5, (Date) users.getCreated_at());
+            pstmt.setString(6, users.getRole());
 
             /*pstmt.executeUpdate();*/
 
@@ -83,6 +84,32 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
             String sql = "SELECT * FROM public.users";
 
             PreparedStatement pstmt = getConnection().prepareCall(sql);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                users.add(transformSqlToUsers(rs));
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public ArrayList<Users> getAllUsersByRole(String role) {
+
+        ArrayList<Users> users = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT * FROM public.users WHERE role = ?";
+
+            PreparedStatement pstmt = getConnection().prepareCall(sql);
+
+            pstmt.setString(1, role);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -195,6 +222,7 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
         users.setUsers_email(rs.getString("email"));
         users.setPassword(rs.getString("password"));
         users.setCreated_at(rs.getDate("created_at"));
+        users.setRole(rs.getString("role"));
 
         return users;
     }

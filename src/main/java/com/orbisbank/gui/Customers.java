@@ -11,9 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 public class Customers extends JFrame {
     private JPanel clientsPanel;
@@ -41,7 +39,7 @@ public class Customers extends JFrame {
     private JButton addContractButton;
     private JButton offresÀProposerButton;
 
-    public Customers() throws SQLException {
+    public Customers(JFrame frame) throws SQLException {
 
         Date date_util = new Date();
         java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
@@ -225,17 +223,24 @@ public class Customers extends JFrame {
                 }
             }
         });
+
+        deconnexionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login login = new Login(frame);
+                frame.setContentPane(login.getLoginPanel());
+                frame.pack();;
+                frame.setVisible(true);
+                frame.setTitle("Login");
+            }
+        });
     }
 
     public Object GetData(JTable table, int row_index, int col_index) {
         return table.getModel().getValueAt(row_index, col_index);
     }
 
-    public static void main(String[] args) throws SQLException {
-        JFrame clients = new JFrame("Clients");
-        clients.setContentPane(new Customers().clientsPanel);
-        clients.pack();
-        clients.setVisible(true);
+    public JPanel getClientsPanel() {
+        return clientsPanel;
     }
-
 }

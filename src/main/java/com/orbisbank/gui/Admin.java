@@ -44,8 +44,6 @@ public class Admin extends JFrame {
     private JLabel delete;
     private JLabel contact;
     private JLabel id;
-    private JPanel Log;
-    private JLabel log;
     private JPanel ButtonLogout;
     private JPanel TitleAdmin;
     private JButton buttonEdit;
@@ -54,12 +52,7 @@ public class Admin extends JFrame {
     private JTextField textField1;
     private JTextField textField2;
     private JScrollPane scrollPane;
-    private JScrollPane scrollClients;
     private JTextField searchCommerciaux;
-    private JScrollPane scrollContrats;
-    private JLabel IDClient;
-    private JLabel nomClient;
-    private JLabel prenomClient;
 
     public Admin(JFrame frame) throws SQLException {
         utilisateursButton.setBackground(white);
@@ -86,7 +79,9 @@ public class Admin extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsers();
+        String role = "banque";
+
+        ArrayList<Users> users = DaoFactory.getUsersDao().getAllUsersByRole(role);
 
         String[] columns = new String[]{
                 "Id", "Name", "Surname", "Email",
