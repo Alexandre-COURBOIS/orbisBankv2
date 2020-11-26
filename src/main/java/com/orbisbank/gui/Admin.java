@@ -114,7 +114,7 @@ public class Admin extends JFrame {
                 int row = usersTable.getSelectedRow();
                 int column = usersTable.getColumnCount();
 
-                Object objId =  GetData(usersTable, row, 0);
+                Object objId = GetData(usersTable, row, 0);
                 Object objSurname = GetData(usersTable, row, 1);
                 Object objName = GetData(usersTable, row, 2);
                 Object objEmail = GetData(usersTable, row, 3);
@@ -145,12 +145,12 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Object objId =  GetData(usersTable, usersTable.getSelectedRow(), 0);
+                Object objId = GetData(usersTable, usersTable.getSelectedRow(), 0);
                 int id = (Integer) objId;
 
                 int result = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer cet utilisateur ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
 
-                if(usersTable.getSelectedRow() != -1 && result == JOptionPane.YES_OPTION) {
+                if (usersTable.getSelectedRow() != -1 && result == JOptionPane.YES_OPTION) {
                     tableModel.removeRow(usersTable.getSelectedRow());
                     try {
                         UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc();
@@ -164,7 +164,31 @@ public class Admin extends JFrame {
             }
         });
 
+        buttonEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = usersTable.getSelectedRow();
+
+                int userId = (int) GetData(usersTable, row, 0);
+
+                JFrame frame = new JFrame("Modifier l'utilisateur");
+
+                try {
+
+                    frame.setContentPane(new AdminClients(frame, userId).getAdminClients());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
     }
+
 
     public Object GetData(JTable table, int row_index, int col_index) {
         return table.getModel().getValueAt(row_index, col_index);

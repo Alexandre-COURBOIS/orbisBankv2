@@ -44,6 +44,22 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
     }
 
     @Override
+    public void update(Users users) {
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement("UPDATE public.users SET name  = ?, surname = ?, email = ?, updated_at = ? WHERE id = ?");
+            stmt.setString(1, users.getUsers_name());
+            stmt.setString(2, users.getUsers_surname());
+            stmt.setString(3, users.getUsers_email());
+            stmt.setDate(4, (Date) users.getUpdated_at());
+            stmt.setInt(5, users.getUsers_id());
+
+            stmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public ArrayList<Users> getAllUsers() {
 
         ArrayList<Users> users = new ArrayList<>();
