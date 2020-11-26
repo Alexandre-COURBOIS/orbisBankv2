@@ -18,8 +18,8 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
 
     @Override
     public void createClients(Clients clients) {
-        String sql = "INSERT INTO public.clients (surname, name, email, phone, postalcode, address, city, created_at)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO public.clients (surname, name, email, phone, age, income, owner, postalcode, address, city, created_at)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -29,10 +29,13 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
             pstmt.setString(2, clients.getName());
             pstmt.setString(3, clients.getEmail());
             pstmt.setString(4, clients.getPhone());
-            pstmt.setInt(5, clients.getPostalCode());
-            pstmt.setString(6, clients.getAddress());
-            pstmt.setString(7, clients.getCity());
-            pstmt.setDate(8, (Date) clients.getCreated_at());
+            pstmt.setInt(5,clients.getAge());
+            pstmt.setInt(6,clients.getIncome());
+            pstmt.setBoolean(7,clients.isOwner());
+            pstmt.setInt(8, clients.getPostalCode());
+            pstmt.setString(9, clients.getAddress());
+            pstmt.setString(10, clients.getCity());
+            pstmt.setDate(11, (Date) clients.getCreated_at());
 
             /*pstmt.executeUpdate();*/
 
@@ -172,10 +175,14 @@ public class ClientsDaoJdbc extends JdbcDao implements ClientsDao {
         clients.setName(rs.getString("name"));
         clients.setEmail(rs.getString("email"));
         clients.setPhone(rs.getString("phone"));
+        clients.setAge(rs.getInt("age"));
+        clients.setIncome(rs.getInt("income"));
+        clients.setOwner(rs.getBoolean("owner"));
         clients.setPostalCode(rs.getInt("postalcode"));
         clients.setAddress(rs.getString("address"));
         clients.setCity(rs.getString("city"));
         clients.setCreated_at(rs.getDate("created_at"));
+        clients.setUpdated_at(rs.getDate("updated_at"));
 
         return clients;
     }
