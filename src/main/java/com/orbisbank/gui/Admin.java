@@ -145,21 +145,25 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                Object objId =  GetData(usersTable, usersTable.getSelectedRow(), 0);
-                int id = (Integer) objId;
+                if(usersTable.getSelectedRow() != -1) {
 
-                int result = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer cet utilisateur ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
+                    Object objId =  GetData(usersTable, usersTable.getSelectedRow(), 0);
 
-                if(usersTable.getSelectedRow() != -1 && result == JOptionPane.YES_OPTION) {
-                    tableModel.removeRow(usersTable.getSelectedRow());
-                    try {
-                        UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc();
-                        usersDaoJdbc.deleteUsersById(id);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
+                    int id = (Integer) objId;
+
+                    int result = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer cet utilisateur ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(result == JOptionPane.YES_OPTION) {
+                        tableModel.removeRow(usersTable.getSelectedRow());
+                        try {
+                            UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc();
+                            usersDaoJdbc.deleteUsersById(id);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        JOptionPane.showMessageDialog(null, "L'utilisateur a bien été supprimé");
                     }
-
-                    JOptionPane.showMessageDialog(null, "L'utilisateur a bien été supprimé");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas sélectionné d'utilisateur");
                 }
             }
         });
