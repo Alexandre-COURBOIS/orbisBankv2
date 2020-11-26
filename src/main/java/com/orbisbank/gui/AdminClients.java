@@ -22,14 +22,9 @@ public class AdminClients {
     private JPanel adminClients;
     private JPanel divLeft;
     private JButton utilisateursButton;
-    private JButton clientsButton;
     private JPanel divLogoTop;
     private JPanel divRight;
     private JPanel divTitle;
-    private JPanel Log;
-    private JLabel log;
-    private JPanel ButtonLogout;
-    private JButton buttonLogout;
     private JPanel TitleAdmin;
     private JLabel titleAdmin;
     private JPanel divUser;
@@ -63,12 +58,6 @@ public class AdminClients {
         utilisateursButton.setForeground(black);
         utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
 
-        clientsButton.setBackground(white);
-        clientsButton.setForeground(black);
-        clientsButton.setBorder(BorderFactory.createLineBorder(black));
-
-        buttonLogout.setFocusPainted(false);
-        buttonLogout.setBorder(null);
         validateButton.setFocusPainted(false);
         validateButton.setBorder(null);
 
@@ -86,7 +75,7 @@ public class AdminClients {
         surnameField.setText(user.getUsers_surname());
         emailField.setText(user.getUsers_email());
         created_atField.setText(strDate);
-        updated_atField.setText("Ce champ n'est pas renseigné pour cette utilisateur");
+        updated_atField.setText("Ce champ n'est pas renseigné pour cet utilisateur");
 
         validateButton.addActionListener(new ActionListener() {
             @Override
@@ -156,7 +145,7 @@ public class AdminClients {
                             user.setUpdated_at(date_sql);
                             user.setUsers_id(userId);
 
-                            int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer les mot de passe", JOptionPane.YES_NO_CANCEL_OPTION);
+                            int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer le mot de passe", JOptionPane.YES_NO_CANCEL_OPTION);
 
                             if (result == JOptionPane.YES_OPTION) {
                                 DaoFactory.getUsersDao().updatePassword(user);
@@ -168,7 +157,7 @@ public class AdminClients {
                             throwables.printStackTrace();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(frame, "Les mot de passe ne correspondent pas");
+                        JOptionPane.showMessageDialog(frame, "Les mots de passe ne correspondent pas");
                     }
                 } else {
                     JOptionPane.showMessageDialog(frame, "Merci de renseigner les champs de mot de passe correctement.");
