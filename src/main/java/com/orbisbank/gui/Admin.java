@@ -196,6 +196,14 @@ public class Admin extends JFrame {
                 frame.setTitle("Login");
             }
         });
+        buttonMail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+
+            }
+        });
     }
 
     public Object GetData(JTable table, int row_index, int col_index) {
