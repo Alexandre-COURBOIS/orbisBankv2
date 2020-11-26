@@ -229,6 +229,30 @@ public class Admin extends JFrame {
                 }
             }
         });
+        buttonMail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = usersTable.getSelectedRow();
+
+                if(row != -1) {
+                    String userMail= (String) GetData(usersTable, row, 3);
+
+                    JFrame frame = new JFrame("Envoyer un mail");
+
+                    frame.setContentPane(new Contact(frame, userMail).getContactPanel());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur");
+                }
+
+
+
+            }
+        });
     }
 
 

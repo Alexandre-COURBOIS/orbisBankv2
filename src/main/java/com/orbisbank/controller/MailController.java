@@ -9,6 +9,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.*;
 
 public class MailController {
 
@@ -46,9 +47,12 @@ public class MailController {
             Transport.send(message);
 
             System.out.println("Done");
+            JOptionPane.showMessageDialog(null, "Le mail a bien été envoyé");
 
         } catch (MessagingException e) {
+            JOptionPane.showMessageDialog(null, "Erreur lors de l'envoi du mail");
             throw new RuntimeException(e);
+
         }
     }
 }
