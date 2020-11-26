@@ -28,6 +28,15 @@ public class Customers extends JFrame {
     private JLabel titlePanel;
     private JTable table1;
     private JScrollPane scrollPane;
+    private JPanel divName;
+    private JPanel divInformation;
+    private JPanel divSearch;
+    private JLabel nameCustomers;
+    private JLabel emailCustomers;
+    private JLabel addressCustomers;
+    private JLabel contractCustomers;
+    private JComboBox contractSelect;
+    private JButton addContractButton;
 
     public Customers() throws SQLException {
 
@@ -57,6 +66,18 @@ public class Customers extends JFrame {
         JTable myTable = new JTable(tableModel);
         myTable.setPreferredScrollableViewportSize(new Dimension(400, 100));
         scrollPane.setViewportView(myTable);
+
+        contractSelect.addItem("Compte courant");
+        contractSelect.addItem("Livret jeune");
+        contractSelect.addItem("Livret A");
+        contractSelect.addItem("PEL");
+        contractSelect.addItem("Assurance vie");
+        contractSelect.addItem("Crédit conso");
+        contractSelect.addItem("Crédit immo");
+        contractSelect.addItem("Crédit auto");
+        contractSelect.addItem("Crédit étudiant");
+
+
     }
 
 
@@ -65,6 +86,8 @@ public class Customers extends JFrame {
         clients.setContentPane(new Customers().clientsPanel);
         clients.pack();
         clients.setVisible(true);
+
+
 
 
     }
