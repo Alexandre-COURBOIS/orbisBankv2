@@ -19,6 +19,7 @@ public class Launcher extends JFrame {
         frame.setContentPane(new Login(frame).getLoginPanel());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
+        frame.setLocationRelativeTo(null);frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
     }

@@ -37,7 +37,7 @@ public class Login extends JFrame {
                         JOptionPane.showMessageDialog(loginPanel, " Hello " + user.getUsers_surname() + " " + user.getUsers_name());
                         Admin admin = new Admin(frame);
                         frame.setContentPane(admin.getAdminPanel());
-                        frame.pack();;
+                        frame.pack();
                         frame.setVisible(true);
                         frame.setTitle("Users Administration");
                     } else {
