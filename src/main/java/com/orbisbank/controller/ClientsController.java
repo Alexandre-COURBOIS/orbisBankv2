@@ -13,7 +13,7 @@ public class ClientsController {
     private Clients clients;
 
     public static void main(String[] args) throws SQLException {
-        setClients("Janssen","Pillebout","janssenXxXBG@gmail.com","0666666666", 76000, "23 rue des bg","Rouen" );
+        setClients("Pierre","Alex","pierroalex@gmail.com","0666666666", 76000, "23 rue des bg","Rouen" );
     }
 
     public void newClients() throws SQLException {
@@ -54,7 +54,7 @@ public class ClientsController {
         System.out.println(DaoFactory.getClientsDao().getClientsByEmail(email));
     }
 
-    public static void deleteUserById (int clientsId) throws SQLException {
+    public static void deleteClientById (int clientsId) throws SQLException {
         System.out.println(DaoFactory.getClientsDao().deleteClientsById(clientsId));
     }
 

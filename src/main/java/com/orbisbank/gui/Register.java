@@ -46,19 +46,22 @@ public class Register {
                 String name = nameTextField.getText();
                 String surname = surnameTextField.getText();
                 String email = emailTextField.getText();
-                String password = passwordTextField.getText();
-                String password_verify = confirmPasswordTextField.getText();
+                char[] password = passwordTextField.getPassword();
+                char[] password_verify = confirmPasswordTextField.getPassword();
 
-                if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || password_verify.isEmpty()) {
+                String StrPassword = String.valueOf(password);
+                String StrNewPassword = String.valueOf(password_verify);
+
+                if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || StrPassword.isEmpty() || StrNewPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(register_panel, "Complete each text field please");
                 } else {
-                    String passwordEncoded = hash.hashPassword(password);
-                    String passwordVerifyEncoded = hash.hashPassword(password_verify);
+                    String passwordEncoded = hash.hashPassword(StrPassword);
+                    String passwordVerifyEncoded = hash.hashPassword(StrNewPassword);
 
                     user.setUsers_name(name);
                     user.setUsers_surname(surname);
                     user.setUsers_email(email);
-                    user.setPassword(hash.hashPassword(password));
+                    user.setPassword(hash.hashPassword(StrPassword));
                     user.setCreated_at(date_sql);
 
                     if (passwordEncoded.equals(passwordVerifyEncoded)) {
