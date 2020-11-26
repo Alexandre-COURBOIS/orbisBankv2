@@ -24,11 +24,8 @@ public class AdminClients {
     private JPanel divLabels;
     private JLabel surname;
     private JPanel divButtons;
-    private JLabel editLabel;
-    private JLabel deleteLabel;
-    private JLabel emailLabel;
     private JButton editButton;
-    private JButton deleteButton;
+    private JButton validateButton;
     private JButton emailButton;
     private JPanel divContent;
     private JLabel name;
@@ -51,6 +48,11 @@ public class AdminClients {
     private JLabel idLabel;
     private JLabel email;
     private JTextField updated_atField;
+    private JLabel password;
+    private JTextField newPassword;
+    private JLabel passwordValidate;
+    private JTextField validateNewPassword;
+    private JButton validerButton;
 
     public AdminClients() {
         utilisateursButton.setBackground(white);
@@ -63,12 +65,9 @@ public class AdminClients {
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
-        editButton.setFocusPainted(false);
-        editButton.setBorder(null);
-        deleteButton.setFocusPainted(false);
-        deleteButton.setBorder(null);
-        emailButton.setFocusPainted(false);
-        emailButton.setBorder(null);
+        validateButton.setFocusPainted(false);
+        validateButton.setBorder(null);
+
     }
 
     String[] columns = new String[] {
