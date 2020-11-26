@@ -172,3 +172,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,macos,osx,windows,linux
+/src/main/resources/properties/config.properties
