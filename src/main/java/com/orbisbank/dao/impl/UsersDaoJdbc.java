@@ -60,6 +60,20 @@ public class UsersDaoJdbc extends JdbcDao implements UsersDao {
     }
 
     @Override
+    public void updatePassword(Users users) {
+        try {
+            PreparedStatement stmt = getConnection().prepareStatement("UPDATE public.users SET password  = ?, updated_at = ? WHERE id = ?");
+            stmt.setString(1, users.getPassword());
+            stmt.setDate(2, (Date) users.getUpdated_at());
+            stmt.setInt(3, users.getUsers_id());
+
+            stmt.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
     public ArrayList<Users> getAllUsers() {
 
         ArrayList<Users> users = new ArrayList<>();

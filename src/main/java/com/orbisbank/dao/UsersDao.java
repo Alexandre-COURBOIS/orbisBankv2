@@ -12,5 +12,5 @@ public interface UsersDao {
     public Users getUsersByEmail(String usersEmail);
     public boolean deleteUsersById(int id);
     public void update(Users users);
-
+    public void updatePassword(Users users);
 }

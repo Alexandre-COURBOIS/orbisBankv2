@@ -1,12 +1,14 @@
 package com.orbisbank.gui;
 
 import com.orbisbank.dao.DaoFactory;
+import com.orbisbank.dao.impl.SecurityDao;
 import com.orbisbank.model.Users;
 
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.security.Security;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,7 +36,6 @@ public class AdminClients {
     private JPanel divH2;
     private JPanel divLabels;
     private JLabel surname;
-    private JPanel divButtons;
     private JButton editButton;
     private JButton validateButton;
     private JButton emailButton;
@@ -52,10 +53,10 @@ public class AdminClients {
     private JLabel email;
     private JLabel updated_atField;
     private JLabel password;
-    private JTextField newPassword;
     private JLabel passwordValidate;
-    private JTextField validateNewPassword;
     private JButton validerButton;
+    private JPasswordField newPassword;
+    private JPasswordField validateNewPassword;
 
     public AdminClients(JFrame frame, int id) throws SQLException {
         utilisateursButton.setBackground(white);
@@ -109,7 +110,7 @@ public class AdminClients {
                     user.setUpdated_at(date_sql);
                     user.setUsers_id(userId);
 
-                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
+                    int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer l'utilisateur " + newName , JOptionPane.YES_NO_CANCEL_OPTION);
 
                     if (result == JOptionPane.YES_OPTION) {
                         DaoFactory.getUsersDao().update(user);
@@ -119,6 +120,56 @@ public class AdminClients {
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
+                }
+            }
+        });
+
+        validerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                SecurityDao hash = new SecurityDao();
+
+                Date date_util = new Date();
+                java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
+
+                char[] newPasswordUser = newPassword.getPassword(); //Deprecated, think to find an other issue
+                char[] newPassword_verify = validateNewPassword.getPassword(); //Deprecated, think to find an other issue
+
+                String strNewPwd = String.valueOf(newPasswordUser);
+                String strNewPwdVerify = String.valueOf(newPassword_verify);
+
+                String passwordEncoded = hash.hashPassword(strNewPwd);
+                String passwordVerifyEncoded = hash.hashPassword(strNewPwdVerify);
+
+
+                if (!strNewPwd.isEmpty() || !strNewPwdVerify.isEmpty()) {
+                    if (passwordEncoded.equals(passwordVerifyEncoded)) {
+                        try {
+
+                            System.out.println("toto");
+                            Users user = new Users();
+
+                            user.setPassword(passwordEncoded);
+                            user.setUpdated_at(date_sql);
+                            user.setUsers_id(userId);
+
+                            int result = JOptionPane.showConfirmDialog(null, "Voulez-vous valider ces modifications ?", "Editer les mot de passe", JOptionPane.YES_NO_CANCEL_OPTION);
+
+                            if (result == JOptionPane.YES_OPTION) {
+                                DaoFactory.getUsersDao().updatePassword(user);
+                                JOptionPane.showMessageDialog(null, "Le mot de passe a bien été mis à jour !");
+                                frame.dispose();
+                            }
+
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Les mot de passe ne correspondent pas");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Merci de renseigner les champs de mot de passe correctement.");
                 }
             }
         });
