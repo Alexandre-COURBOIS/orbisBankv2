@@ -2,15 +2,18 @@ package com.orbisbank.gui;
 
 import com.orbisbank.dao.DaoFactory;
 import com.orbisbank.model.Clients;
+import com.orbisbank.model.Contract;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class Customers extends JFrame {
     private JPanel clientsPanel;
@@ -24,8 +27,6 @@ public class Customers extends JFrame {
     private JButton offresButtonMenu;
     private JButton clientsButtonMenu;
     private JButton deconnexionButton;
-    private JTextField searchTextField;
-    private JButton searchButton;
     private JLabel titlePanel;
     private JTable table1;
     private JScrollPane scrollPane;
@@ -38,8 +39,12 @@ public class Customers extends JFrame {
     private JLabel contractCustomers;
     private JComboBox contractSelect;
     private JButton addContractButton;
+    private JButton offresÀProposerButton;
 
     public Customers() throws SQLException {
+
+        Date date_util = new Date();
+        java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -124,8 +129,9 @@ public class Customers extends JFrame {
         colAddress.setPreferredWidth(175);
         colAddress.setResizable(true);
 
-
         scrollPane.setViewportView(myTable);
+
+        contractSelect.addItem("--- Offres ---");
         contractSelect.addItem("Compte courant");
         contractSelect.addItem("Livret jeune");
         contractSelect.addItem("Livret A");
@@ -148,13 +154,15 @@ public class Customers extends JFrame {
                 Object objSurname = GetData(myTable, row, 1);
                 Object objName = GetData(myTable, row, 2);
                 Object objEmail = GetData(myTable, row, 3);
-                Object objPhone = GetData(myTable,row,4);
-                Object objAge = GetData(myTable,row,5);
+                Object objPhone = GetData(myTable, row, 4);
+                Object objAge = GetData(myTable, row, 5);
                 Object objIncome = GetData(myTable, row, 6);
                 Object objOwner = GetData(myTable, row, 7);
-                Object objAddress = GetData(myTable, row,8);
+                Object objAddress = GetData(myTable, row, 8);
 
                 String userId = objId.toString();
+                int requestId = Integer.parseInt(userId);
+
                 String userSurname = objSurname.toString();
                 String userName = objName.toString();
                 String userEmail = objEmail.toString();
@@ -164,10 +172,57 @@ public class Customers extends JFrame {
                 String userOwner = objOwner.toString();
                 String userAdress = objAddress.toString();
 
+                try {
+                    ArrayList<Contract> contracts = DaoFactory.getContractDao().getContractByClientId(requestId);
+
+                    StringBuilder list = new StringBuilder();
+                    for (Contract contract : contracts) {
+
+                        list.append(contract.getContract()).append("  ");
+                    }
+
+                    contractCustomers.setText(String.valueOf(list));
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
                 nameCustomers.setText(userSurname + " - " + userName);
                 emailCustomers.setText(userEmail + " - " + userPhone);
                 addressCustomers.setText(userAdress);
+            }
+        });
 
+        addContractButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Object item = contractSelect.getSelectedItem();
+
+                if (item != null && item != "" && item != "--- Offres ---") {
+                    try {
+
+                        int row = myTable.getSelectedRow();
+
+                        Object objId = GetData(myTable, row, 0);
+
+                        String userId = objId.toString();
+                        int requestId = Integer.parseInt(userId);
+
+                        Contract contract = new Contract();
+
+                        contract.setClient_id(requestId);
+                        contract.setContract((String) item);
+                        contract.setCreated_at(date_sql);
+
+                        DaoFactory.getContractDao().createContract(contract);
+
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Merci saisir une offre");
+                }
             }
         });
     }
@@ -181,9 +236,6 @@ public class Customers extends JFrame {
         clients.setContentPane(new Customers().clientsPanel);
         clients.pack();
         clients.setVisible(true);
-
-
     }
-
 
 }
