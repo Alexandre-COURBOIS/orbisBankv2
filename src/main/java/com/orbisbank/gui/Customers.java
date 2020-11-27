@@ -135,10 +135,10 @@ public class Customers extends JFrame {
         contractSelect.addItem("Livret A");
         contractSelect.addItem("PEL");
         contractSelect.addItem("Assurance vie");
-        contractSelect.addItem("Crédit conso");
-        contractSelect.addItem("Crédit immo");
-        contractSelect.addItem("Crédit auto");
-        contractSelect.addItem("Crédit étudiant");
+        contractSelect.addItem("Credit conso");
+        contractSelect.addItem("Credit immo");
+        contractSelect.addItem("Credit auto");
+        contractSelect.addItem("Credit etudiant");
 
         myTable.addMouseListener(new MouseAdapter() {
             @Override
