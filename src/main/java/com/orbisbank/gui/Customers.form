@@ -43,20 +43,6 @@
               <text value="Offres"/>
             </properties>
           </component>
-          <component id="44217" class="javax.swing.JButton" binding="clientsButtonMenu">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-                <maximum-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-16771273"/>
-              <enabled value="true"/>
-              <foreground color="-16771273"/>
-              <text value="Clients"/>
-            </properties>
-          </component>
           <vspacer id="ff3db">
             <constraints>
               <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -111,6 +97,17 @@
             </constraints>
             <properties>
               <text value="Contacter"/>
+            </properties>
+          </component>
+          <component id="938d8" class="javax.swing.JButton" binding="clientsButtonMenu">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+                <maximum-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <text value="Clients"/>
             </properties>
           </component>
         </children>
