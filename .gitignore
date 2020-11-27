@@ -134,9 +134,6 @@ fabric.properties
 # See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
 .idea/
-.src/main/java/com/orbisbank/dao/impl/.JdbcDao
-
-
 
 # Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
@@ -175,3 +172,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/phpstorm+all,macos,osx,windows,linux
+/src/main/resources/properties/config.properties
+/target/classes/properties/config.properties
