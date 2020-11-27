@@ -220,7 +220,7 @@ public class Admin extends JFrame {
 
                 JFrame frame = new JFrame("Ajouter un nouvel utilisateur");
 
-                frame.setContentPane(new Register().getRegister_panel());
+                frame.setContentPane(new Register(frame).getRegister_panel());
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);
