@@ -50,11 +50,9 @@ public class Admin extends JFrame {
     private JTextField textField1;
     private JTextField textField2;
     private JScrollPane scrollPane;
+    private JButton addBankUser;
 
     public Admin(JFrame frame) throws SQLException {
-        utilisateursButton.setBackground(white);
-        utilisateursButton.setForeground(black);
-        utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
@@ -160,7 +158,6 @@ public class Admin extends JFrame {
                 Login login = new Login(frame);
                 frame.setContentPane(login.getLoginPanel());
                 frame.pack();
-                ;
                 frame.setVisible(true);
                 frame.setTitle("Login");
             }
@@ -216,6 +213,21 @@ public class Admin extends JFrame {
                     JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur");
                 }
 
+
+            }
+        });
+
+        addBankUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame frame = new JFrame("Ajouter un nouvel utilisateur");
+
+                frame.setContentPane(new Register().getRegister_panel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
 
             }
         });
