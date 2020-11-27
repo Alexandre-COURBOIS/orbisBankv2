@@ -167,29 +167,26 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int row = usersTable.getSelectedRow();
+                if (usersTable.getSelectedRow() != -1) {
+                    int row = usersTable.getSelectedRow();
 
-                int userId = (int) GetData(usersTable, row, 0);
+                    int userId = (int) GetData(usersTable, row, 0);
 
-                JFrame frame = new JFrame("Modifier l'utilisateur");
+                    JFrame frame = new JFrame("Modifier l'utilisateur");
 
-                try {
+                    try {
 
-                    frame.setContentPane(new AdminClients(frame, userId).getAdminClients());
-                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    frame.pack();
-                    frame.setVisible(true);
-                    frame.setLocationRelativeTo(null);
+                        frame.setContentPane(new AdminClients(frame, userId).getAdminClients());
+                        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        frame.pack();
+                        frame.setVisible(true);
+                        frame.setLocationRelativeTo(null);
 
-                    System.out.println("active" + frame.isActive());
-
-
-                    if (frame.isActive()) {
-
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
                     }
-
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez pas sélectionné d'utilisateur");
                 }
             }
         });
