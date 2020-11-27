@@ -9,8 +9,6 @@ public class Launcher extends JFrame {
 
     public Launcher() {
 
-        Register register = new Register();
-
     }
 
     public static void main(String[] args) {

@@ -30,7 +30,7 @@ public class Register {
     private JLabel confimPasswordLabel;
     private JPasswordField confirmPasswordTextField;
 
-    public Register() {
+    public Register(JFrame frame) {
 
         registerButton.addActionListener(new ActionListener() {
 
@@ -54,6 +54,7 @@ public class Register {
 
                 if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || StrPassword.isEmpty() || StrNewPassword.isEmpty()) {
                     JOptionPane.showMessageDialog(register_panel, "Complete each text field please");
+
                 } else {
                     String passwordEncoded = hash.hashPassword(StrPassword);
                     String passwordVerifyEncoded = hash.hashPassword(StrNewPassword);
@@ -67,13 +68,16 @@ public class Register {
 
                     if (passwordEncoded.equals(passwordVerifyEncoded)) {
                         try {
+                            int result = JOptionPane.showConfirmDialog(null, "Vous êtes sur le point de créer un nouvel utilisateur êtes-vous sûr ?", "Nouvel utilisateur", JOptionPane.YES_NO_CANCEL_OPTION);
 
-                            DaoFactory.getUsersDao().createUsers(user);
+                            if (result == JOptionPane.YES_OPTION) {
+                                DaoFactory.getUsersDao().createUsers(user);
+                                JOptionPane.showMessageDialog(null, "L'utilisateur a bien été ajouté");
+                                frame.dispose();
+                            }
 
-                        } catch (SQLException throwables) {
+                        } catch (Exception throwables) {
                             throwables.printStackTrace();
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
                         }
                     } else {
                         passwordLabel.setText("Les mots de passe ne correspondent pas.");
