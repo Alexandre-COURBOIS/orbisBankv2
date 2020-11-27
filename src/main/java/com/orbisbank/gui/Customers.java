@@ -247,13 +247,56 @@ public class Customers extends JFrame {
 
                 int row = myTable.getSelectedRow();
 
-                if (row != 1) {
+                if (row != -1) {
 
                     String userMail = (String) GetData(myTable, row, 3);
 
                     JFrame frame = new JFrame("Envoyer un mail");
 
                     frame.setContentPane(new Contact(frame, userMail).getContactPanel());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur");
+                }
+            }
+        });
+
+        clientsButtonMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = myTable.getSelectedRow();
+
+                if (row != -1) {
+
+                    Object objId = GetData(myTable, row, 0);
+                    Object objName = GetData(myTable, row, 1);
+                    Object objSurname = GetData(myTable, row, 2);
+                    Object objEmail = GetData(myTable, row, 3);
+                    Object objPhone = GetData(myTable, row, 4);
+                    Object objAge = GetData(myTable, row, 5);
+                    Object objIncome = GetData(myTable, row, 6);
+                    Object objOwner = GetData(myTable, row, 7);
+                    Object objAddress = GetData(myTable, row, 8);
+
+                    String userId = objId.toString();
+                    int requestId = Integer.parseInt(userId);
+
+                    String userSurname = objSurname.toString();
+                    String userName = objName.toString();
+                    String userEmail = objEmail.toString();
+                    String userPhone = objPhone.toString();
+                    String userAge = objAge.toString();
+                    String userIncome = objIncome.toString();
+                    String userOwner = objOwner.toString();
+                    String userAdress = objAddress.toString();
+
+                    JFrame frame = new JFrame("Informations concernant : " + objName.toString() + " " + objSurname.toString());
+
+                    frame.setContentPane(new InformationsClient(frame, requestId).getInformationsClientPanel());
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     frame.pack();
                     frame.setVisible(true);
