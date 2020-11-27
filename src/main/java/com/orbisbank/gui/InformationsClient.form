@@ -14,13 +14,15 @@
     <children>
       <component id="82c2d" class="javax.swing.JLabel" binding="clientInformationsLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="20"/>
+          </grid>
         </constraints>
         <properties>
           <background color="-16771273"/>
           <font size="20"/>
           <foreground color="-2368548"/>
-          <text value="Informations à propos de :  "/>
+          <text value="INFORMATIONS CLIENTS"/>
         </properties>
       </component>
       <component id="3e226" class="javax.swing.JLabel" binding="nameLabel">
