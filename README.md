@@ -30,10 +30,16 @@
                 return this.connection;
             } 
         }
-   
-6) Click right on your name project and Rebuild the module.
 
-7) Try it ! And tell us what you think about it ! 
+6) add the file config.properties in ressources/properties with your smtp login : 
+
+        ####### LOGS GOOGLE ORBISBANK #########
+        orbisbank.login=SmtpLogin
+        orbisbank.password=SmtpPassword
+  
+7) Click right on your name project and Rebuild the module.
+
+8) Try it ! And tell us what you think about it ! 
 
 Personnal informations :
 
