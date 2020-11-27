@@ -264,6 +264,27 @@ public class Customers extends JFrame {
                 }
             }
         });
+        offresÀProposerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = myTable.getSelectedRow();
+
+                if (row != -1) {
+
+                    int userId = (int) GetData(myTable, row, 0);
+
+                    JFrame frame = new JFrame("Offres conseillées");
+
+                    frame.setContentPane(new CustomerOffer(userId).getCustomerOfferPanel());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur");
+                }
+            }
+        });
     }
 
     public Object GetData(JTable table, int row_index, int col_index) {

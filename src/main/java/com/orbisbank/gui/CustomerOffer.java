@@ -1,6 +1,9 @@
 package com.orbisbank.gui;
 
+import com.orbisbank.controller.CustomersController;
+
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class CustomerOffer {
     private JPanel customerOfferPanel;
@@ -11,5 +14,22 @@ public class CustomerOffer {
 
     public CustomerOffer (int userId) {
 
+        CustomersController controller = new CustomersController();
+
+        ArrayList<String> personalizedOffers = controller.getPersonalizedOffers(userId);
+
+        System.out.println(personalizedOffers.toString());
+
+        StringBuilder listOffers = new StringBuilder();
+
+        for(String offer : personalizedOffers) {
+            listOffers.append(offer).append(" ");
+        }
+        offerListLabel.setText(String.valueOf(listOffers));
+
+    }
+
+    public JPanel getCustomerOfferPanel() {
+        return customerOfferPanel;
     }
 }
