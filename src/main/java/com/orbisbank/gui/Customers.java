@@ -170,6 +170,7 @@ public class Customers extends JFrame {
                 String userOwner = objOwner.toString();
                 String userAdress = objAddress.toString();
 
+
                 try {
                     ArrayList<Contract> contracts = DaoFactory.getContractDao().getContractByClientId(requestId);
 
@@ -188,6 +189,10 @@ public class Customers extends JFrame {
                 nameCustomers.setText(userSurname + " - " + userName);
                 emailCustomers.setText(userEmail + " - " + userPhone);
                 addressCustomers.setText(userAdress);
+
+                contacterButtonMenu.setText("Contacter " + userName);
+                offresButtonMenu.setText("Offres pour " + userName);
+
             }
         });
 
@@ -229,9 +234,34 @@ public class Customers extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Login login = new Login(frame);
                 frame.setContentPane(login.getLoginPanel());
-                frame.pack();;
+                frame.pack();
                 frame.setVisible(true);
                 frame.setTitle("Login");
+
+            }
+        });
+
+        contacterButtonMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = myTable.getSelectedRow();
+
+                if (row != 1) {
+
+                    String userMail = (String) GetData(myTable, row, 3);
+
+                    JFrame frame = new JFrame("Envoyer un mail");
+
+                    frame.setContentPane(new Contact(frame, userMail).getContactPanel());
+                    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    frame.pack();
+                    frame.setVisible(true);
+                    frame.setLocationRelativeTo(null);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un utilisateur");
+                }
             }
         });
     }

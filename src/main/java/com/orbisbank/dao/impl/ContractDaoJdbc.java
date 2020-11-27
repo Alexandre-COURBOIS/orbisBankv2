@@ -2,6 +2,7 @@ package com.orbisbank.dao.impl;
 
 import com.orbisbank.dao.ContractDao;
 import com.orbisbank.model.Contract;
+import com.orbisbank.model.Users;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -91,6 +92,35 @@ public class ContractDaoJdbc extends JdbcDao implements ContractDao {
 
             e.printStackTrace();
 
+        }
+        return contract;
+    }
+
+    @Override
+    public ArrayList<Contract> getAllContractByName(int client_id, String contract_name) {
+
+        ArrayList<Contract> contract = new ArrayList<>();
+
+        try {
+
+            String sql = "SELECT * FROM public.contract WHERE client_id = ? AND contract = ?";
+
+            PreparedStatement pstmt = getConnection().prepareCall(sql);
+
+            pstmt.setInt(1, client_id);
+            pstmt.setString(2, contract_name);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                contract.add(transformSqlToSqlContract(rs));
+
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return contract;
     }

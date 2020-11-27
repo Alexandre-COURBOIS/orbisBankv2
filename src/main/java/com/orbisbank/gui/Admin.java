@@ -28,8 +28,6 @@ public class Admin extends JFrame {
     private JPanel divUser;
     private JPanel divContent;
     private JButton utilisateursButton;
-    private JButton commerciauxButton;
-    private JButton clientsButton;
     private JPanel divLogoTop;
     private JLabel titleAdmin;
     private JButton buttonLogout;
@@ -52,20 +50,9 @@ public class Admin extends JFrame {
     private JTextField textField1;
     private JTextField textField2;
     private JScrollPane scrollPane;
-    private JTextField searchCommerciaux;
+    private JButton addBankUser;
 
     public Admin(JFrame frame) throws SQLException {
-        utilisateursButton.setBackground(white);
-        utilisateursButton.setForeground(black);
-        utilisateursButton.setBorder(BorderFactory.createLineBorder(black));
-
-        commerciauxButton.setBackground(white);
-        commerciauxButton.setForeground(black);
-        commerciauxButton.setBorder(BorderFactory.createLineBorder(black));
-
-        clientsButton.setBackground(white);
-        clientsButton.setForeground(black);
-        clientsButton.setBorder(BorderFactory.createLineBorder(black));
 
         buttonLogout.setFocusPainted(false);
         buttonLogout.setBorder(null);
@@ -87,13 +74,12 @@ public class Admin extends JFrame {
                 "Id", "Name", "Surname", "Email",
         };
 
-        DefaultTableModel tableModel = new DefaultTableModel(columns, 0){
+        DefaultTableModel tableModel = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int i, int i1) {
                 return false;
             }
         };
-
 
 
         for (Users user : users) {
@@ -129,17 +115,6 @@ public class Admin extends JFrame {
                 email.setText(userEmail);
                 id.setText(userId);
 
-/*
-                for (int i = 0; i < column; i++) {
-
-                    String value = " " + usersTable.getValueAt(row, i).toString();
-
-                    System.out.println(value);
-
-                }
-*/
-
-
             }
         });
 
@@ -147,14 +122,14 @@ public class Admin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(usersTable.getSelectedRow() != -1) {
+                if (usersTable.getSelectedRow() != -1) {
 
-                    Object objId =  GetData(usersTable, usersTable.getSelectedRow(), 0);
+                    Object objId = GetData(usersTable, usersTable.getSelectedRow(), 0);
 
                     int id = (Integer) objId;
 
                     int result = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment supprimer cet utilisateur ?", "Suppression", JOptionPane.YES_NO_CANCEL_OPTION);
-                    if(result == JOptionPane.YES_OPTION) {
+                    if (result == JOptionPane.YES_OPTION) {
                         tableModel.removeRow(usersTable.getSelectedRow());
                         try {
                             UsersDaoJdbc usersDaoJdbc = new UsersDaoJdbc();
@@ -176,24 +151,13 @@ public class Admin extends JFrame {
                 // BOUTON UTILISATEURS
             }
         });
-        commerciauxButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //BOUTON COMMERCIAUX
-            }
-        });
-        clientsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //BOUTON CLIENTS
-            }
-        });
+
         buttonLogout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login login = new Login(frame);
                 frame.setContentPane(login.getLoginPanel());
-                frame.pack();;
+                frame.pack();
                 frame.setVisible(true);
                 frame.setTitle("Login");
             }
@@ -235,8 +199,8 @@ public class Admin extends JFrame {
 
                 int row = usersTable.getSelectedRow();
 
-                if(row != -1) {
-                    String userMail= (String) GetData(usersTable, row, 3);
+                if (row != -1) {
+                    String userMail = (String) GetData(usersTable, row, 3);
 
                     JFrame frame = new JFrame("Envoyer un mail");
 
@@ -250,6 +214,20 @@ public class Admin extends JFrame {
                 }
 
 
+            }
+        });
+
+        addBankUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFrame frame = new JFrame("Ajouter un nouvel utilisateur");
+
+                frame.setContentPane(new Register().getRegister_panel());
+                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                frame.pack();
+                frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
 
             }
         });
